@@ -19,13 +19,13 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 # PSFzf to replace the standard tab completeion
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
-##############################################################################
-# below used the setup found here - https://christitus.com/pretty-powershell #
-##############################################################################
+###############################################################################
+# below used the setup found here - https://christitus.com/pretty-powershell  #
+###############################################################################
 
-# Simple function to start a new elevated process. If arguments are supplied then 
-# a single command is started with admin rights; if not then a new admin instance
-# of PowerShell is started.
+# Simple function to start a new elevated process. If arguments are supplied
+# then a single command is started with admin rights; if not then a new admin
+# instance of PowerShell is started.
 function admin {
     if ($args.Count -gt 0) {   
         $argList = "& '" + $args + "'"
@@ -35,41 +35,43 @@ function admin {
     }
 }
 
-# Set UNIX-like aliases for the admin command, so sudo <command> will run the command
-# with elevated rights. 
+# Set UNIX-like aliases for the admin command, so sudo <command> will run the
+# command with elevated rights. 
 Set-Alias -Name su -Value admin
 Set-Alias -Name sudo -Value admin
 
 
-# Set UNIX-like aliases for the admin command, so sudo <command> will run the command
-# with elevated rights. 
+# Python aliases and functions.
 Set-Alias -Name ipy -Value ipython
 
+# lookup all the python virtual enviroments in the ~\py_venvs directory and
+# then pipe into fzf and activate the selection.
 function pyvenv {
     Get-ChildItem -Path ~\py_venvs -Name | Invoke-Fzf | % {& "C:\Users\Alan_\py_venvs\$_\Scripts\activate.ps1"}
 }
 
 
-# Make it easy to edit this profile once it's installed
+# Make it easy to edit nvim config.
 function nvimconf{
     cd C:/Users/Alan_/AppData/Local/nvim
     nvim
 }
 
-# Make it easy to edit this profile once it's installed
+# Make it easy to edit this profile once it's installed.
 function Edit-Profile {
     nvim C:\Users\Alan_\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 }
 
-# function to just print all files in current directory excluding folders
+# function to just print all files in current directory excluding folders.
 function ll { Get-ChildItem -Path $pwd -File }
 
-# function to simply reload the powershell profile
+# function to simply reload the powershell profile.
 function reload-profile {
     & $profile
 }
 
-# function to find a file (case insensitive) in the current directory and directories below
+# function to find a file (case insensitive) in the current directory and
+# directories below.
 function find-file($name) {
     Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
         $place_path = $_.directory
