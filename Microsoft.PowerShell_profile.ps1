@@ -19,7 +19,6 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 # PSFzf to replace the standard tab completeion
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
-
 ##############################################################################
 # below used the setup found here - https://christitus.com/pretty-powershell #
 ##############################################################################
@@ -41,6 +40,21 @@ function admin {
 Set-Alias -Name su -Value admin
 Set-Alias -Name sudo -Value admin
 
+
+# Set UNIX-like aliases for the admin command, so sudo <command> will run the command
+# with elevated rights. 
+Set-Alias -Name ipy -Value ipython
+
+function pyvenv {
+    Get-ChildItem -Path ~\py_venvs -Name | Invoke-Fzf | % {& "C:\Users\Alan_\py_venvs\$_\Scripts\activate.ps1"}
+}
+
+
+# Make it easy to edit this profile once it's installed
+function nvimconf{
+    cd C:/Users/Alan_/AppData/Local/nvim
+    nvim
+}
 
 # Make it easy to edit this profile once it's installed
 function Edit-Profile {
