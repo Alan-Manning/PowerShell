@@ -20,6 +20,12 @@ I then have PSFzf which is a lightwight wrapper around fzf for powershell https:
 
 In terms of look i have oh-my-posh https://ohmyposh.dev/. This is a simple one line setup with the atomic theme.
 
+# Modules
+- [poshcowsay](https://github.com/kanej/Posh-Cowsay)
+- [lolcat](https://www.powershellgallery.com/packages/lolcat/1.0.7)
+
+In terms of look i have oh-my-posh https://ohmyposh.dev/. This is a simple one line setup with the atomic theme.
+
 # Related
 
 My neovim setup https://github.com/Alan-Manning/neovim.
